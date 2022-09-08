@@ -1,0 +1,22 @@
+{
+  "name": "mahelbir/mclient",
+  "description": "Simple async request wrapper for Guzzle",
+  "type": "library",
+  "homepage": "https://github.com/mahelbir/mclient",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mahmuthan Elbir",
+      "email": "me@mahmuthanelbir.com.tr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mahelbir\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "guzzlehttp/guzzle": ">=7.0.0"
+  }
+}
