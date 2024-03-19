@@ -46,7 +46,7 @@ class Mclient
     /**
      * @var string
      */
-    private $version = "1.0";
+    private $version = "2.0";
 
     /**
      *
@@ -66,18 +66,22 @@ class Mclient
      * @param array $options
      * @param null $extra
      * @return void
+     * @throws Exception
      */
     public function request(string $method, string $url, array $headers = [], array $options = [], $extra = null): void
     {
         $headers = array_change_key_case($headers);
         $options = array_change_key_case($options);
-        if (!empty($options["interface"]) && empty($options["proxy"])) {
+        if (!empty($options["interface"])) {
+            if (!empty($options["proxy"])) {
+                throw new Exception("Using an interface IP address and a proxy together is not allowed");
+            }
             $options["curl"][CURLOPT_IPRESOLVE] = stristr($options["interface"], ":") ? CURL_IPRESOLVE_V6 : CURL_IPRESOLVE_V4;
             $options["curl"][CURLOPT_INTERFACE] = $options["interface"];
         }
-        $options["verify"] = false;
+        $options["verify"] = $options["verify"] ?? false;
         if (empty($headers["user-agent"]))
-            $headers["user-agent"] = 'Mclient/' . $this->version;
+            $headers["user-agent"] = "Mclient/" . $this->version;
 
         $this->requests[] = [
             "method" => strtoupper($method),
@@ -95,14 +99,19 @@ class Mclient
      * @param array $options
      * @param null $extra
      * @return void
+     * @throws Exception
      */
     public function post(string $url, $data, array $headers = [], array $options = [], $extra = null): void
     {
+        unset($options["form_params"]);
+        unset($options["body"]);
+
         if (is_array($data)) {
             $options["form_params"] = $data;
         } else {
             $options["body"] = $data;
         }
+
         $this->request("POST", $url, $headers, $options, $extra);
     }
 
@@ -113,11 +122,15 @@ class Mclient
      * @param array $options
      * @param null $extra
      * @return void
+     * @throws Exception
      */
     public function get(string $url, array $data = [], array $headers = [], array $options = [], $extra = null): void
     {
+        unset($options["query"]);
+
         if (!empty($data))
             $options["query"] = $data;
+
         $this->request("GET", $url, $headers, $options, $extra);
     }
 
@@ -199,7 +212,7 @@ class Mclient
                 ];
             },
             'rejected' => function (Exception $e, $request) {
-                $body = '';
+                $body = "";
                 $headers = [];
                 if ($e instanceof BadResponseException) {
                     $body = trim($e->getResponse()->getBody()->getContents());

@@ -1,31 +1,7 @@
-# Mclient
+<?php
 
-[![Latest version][ico-version]][link-packagist]
-[![Software License][ico-license]][link-license]
-[![Total Downloads][ico-downloads]][link-downloads]
+require __DIR__ . '/../vendor/autoload.php';
 
-Mclient acts as a straightforward asynchronous wrapper around Guzzle for making HTTP requests.
-
-## Requirements
-
-PHP 7.1+
-
-[Guzzle 7.0+](https://github.com/guzzle/guzzle)
-
-## Installation
-
-Simply add a dependency on `mahelbir/mclient` to your composer.json file if you
-use [Composer](https://getcomposer.org/) to manage the dependencies of your project:
-
-```sh
-composer require mahelbir/mclient
-```
-
-Although it's recommended to use Composer, you can actually include files anyway you want.
-
-## Usage
-
-```php
 $mclient = new \Mahelbir\Mclient();
 
 //Library options
@@ -80,20 +56,3 @@ foreach ($responses as $response) {
 // Pass true parameter to retrieve the first/single response
 $mclient->get('https://httpbin.org/get');
 $response = $mclient->execute(true);
-```
-
-## License
-
-The MIT License (MIT). Please see [License File](LISENCE) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/mahelbir/mclient.svg?style=flat-square
-
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-
-[ico-downloads]: https://img.shields.io/packagist/dt/mahelbir/mclient.svg?style=flat-square&v=2
-
-[link-packagist]: https://packagist.org/packages/mahelbir/mclient
-
-[link-license]: LISENCE
-
-[link-downloads]: https://packagist.org/packages/mahelbir/mclient
