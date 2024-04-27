@@ -2,7 +2,6 @@
 
 [![Latest version][ico-version]][link-packagist]
 [![Software License][ico-license]][link-license]
-[![Total Downloads][ico-downloads]][link-downloads]
 
 Mclient acts as a straightforward asynchronous wrapper around Guzzle for making HTTP requests.
 
@@ -84,16 +83,12 @@ $response = $mclient->execute(true);
 
 ## License
 
-The MIT License (MIT). Please see [License File](LISENCE) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/mahelbir/mclient.svg?style=flat-square
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 
-[ico-downloads]: https://img.shields.io/packagist/dt/mahelbir/mclient.svg?style=flat-square&v=2
-
 [link-packagist]: https://packagist.org/packages/mahelbir/mclient
 
-[link-license]: LISENCE
-
-[link-downloads]: https://packagist.org/packages/mahelbir/mclient
+[link-license]: LICENSE

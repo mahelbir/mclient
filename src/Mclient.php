@@ -46,7 +46,7 @@ class Mclient
     /**
      * @var string
      */
-    private $version = "2.0";
+    private $version = "2.1";
 
     /**
      *
